@@ -34,7 +34,7 @@ public class RemoveValueTest {
 
 
         // When
-        Long[] actual = arrayUtility.removeValue(valueToRemove);
+         Long[] actual = arrayUtility.removeValue(valueToRemove);
 
         // Then
         UnitTestingUtils.assertArrayEquality(expected, actual);

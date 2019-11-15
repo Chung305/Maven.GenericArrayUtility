@@ -4,10 +4,7 @@ package com.zipcodewilmington.arrayutility;
 
 import javax.xml.stream.StreamFilter;
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,7 +30,7 @@ public class ArrayUtility<T>  {
         List<T> mergedArray = Stream.concat(Stream.of(data), Stream.of(arrayToMerge)).collect(Collectors.toList());
 
         Map<T , Long> map = mergedArray.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
-        Long occurence = null;
+        long occurence = 0;
         T value = null;
         for(Map.Entry<T, Long>  each : map.entrySet()){
             if(each.getValue() > occurence){
@@ -47,11 +44,22 @@ public class ArrayUtility<T>  {
 
     public T[] removeValue(T valueToRemove){
 
-        return null;
+        List<T> array =  Arrays.stream(data).filter(i -> i != valueToRemove).collect(Collectors.toList());
+
+        T[] result = Arrays.copyOf(this.data, array.size());
+
+        for(int i = 0; i < array.size(); i++){
+            result[i] = array.get(i);
+        }
+
+        return result;
+
+
+
     }
 
     public Integer getNumberOfOccurrences(T valueToEvaluate){
 
-        return null;
+        return Arrays.stream(data).filter(i -> i == valueToEvaluate).toArray(Object[]::new).length;
     }
 }
