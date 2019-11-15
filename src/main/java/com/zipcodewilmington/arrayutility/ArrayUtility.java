@@ -30,6 +30,14 @@ public class ArrayUtility<T>  {
 
     public T getMostCommonFromMerge(T[] arrayToMerge){
 
+        List<T> mergedArray = Stream.concat(Stream.of(data), Stream.of(arrayToMerge)).collect(Collectors.toList());
+
+        Map<T , Long> map = mergedArray.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+
+        T value = null;
+        for(Long each : map.values()){
+        }
+
         return null;
     }
 
