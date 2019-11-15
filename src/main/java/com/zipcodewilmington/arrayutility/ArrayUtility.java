@@ -33,12 +33,16 @@ public class ArrayUtility<T>  {
         List<T> mergedArray = Stream.concat(Stream.of(data), Stream.of(arrayToMerge)).collect(Collectors.toList());
 
         Map<T , Long> map = mergedArray.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
-
+        Long occurence = null;
         T value = null;
-        for(Long each : map.values()){
+        for(Map.Entry<T, Long>  each : map.entrySet()){
+            if(each.getValue() > occurence){
+                occurence = each.getValue();
+                value = each.getKey();
+            }
         }
 
-        return null;
+        return value;
     }
 
     public T[] removeValue(T valueToRemove){
